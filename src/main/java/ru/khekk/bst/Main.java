@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Main {
 
     private static Tree<Integer> tree = new EmptyTree<>();
-    private static final Iterator<Integer> iterator = null;
+    private static Iterator<Integer> iterator = null;
     private static final List<Option<?>> options = Arrays.asList(
             new Option<>(
                     "e",
@@ -57,7 +57,7 @@ public class Main {
             new Option<Integer>(
                     "5",
                     (element) -> tree = tree.filter(element::equals),
-                    "Get element",
+                    "Find element by predicate",
                     true
             ),
             new Option<Integer>(
@@ -71,6 +71,42 @@ public class Main {
                     (element) -> tree = tree.remove((Integer) element),
                     "Remove element",
                     true
+            ),
+            new Option<>(
+                    "8",
+                    (nothing) -> iterator = tree.iterator(),
+                    "Get iterator",
+                    false
+            ),
+            new Option<>(
+                    "8.1",
+                    (nothing) -> iterator = iterator.root(),
+                    "Place iterator on root",
+                    false
+            ),
+            new Option<>(
+                    "8.2",
+                    (nothing) -> !iterator.hasNext(),
+                    "Whether last element reached",
+                    false
+            ),
+            new Option<>(
+                    "8.3",
+                    (nothing) -> iterator.get(),
+                    "Get value of current iterator pointer",
+                    false
+            ),
+            new Option<>(
+                    "8.4",
+                    (nothing) -> iterator.next(),
+                    "Place iterator at next element",
+                    false
+            ),
+            new Option<>(
+                    "8.5",
+                    (nothing) -> iterator.prev(),
+                    "Place iterator at prev element",
+                    false
             )
     );
 

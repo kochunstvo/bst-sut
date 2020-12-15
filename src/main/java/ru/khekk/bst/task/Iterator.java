@@ -17,19 +17,25 @@ public class Iterator<T extends Comparable<T>> {
     }
 
     public boolean hasNext() {
-        return !calculateNext().isEmpty();
+        return !calculateNext(elem -> elem.compareTo(currentPointer.get()) > 0).isEmpty();
     }
 
     public T get() {
         return currentPointer.get();
     }
 
-    public void next() {
-        currentPointer = calculateNext();
+    public String next() {
+        currentPointer = calculateNext(elem -> elem.compareTo(currentPointer.get()) > 0);
+        return "Done";
     }
 
-    private Tree<T> calculateNext() {
-        Tree<T> tree = root.filter(elem -> elem.compareTo(currentPointer.get()) > 0);
+    public String prev() {
+        currentPointer = calculateNext(elem -> elem.compareTo(currentPointer.get()) < 0);
+        return "Done";
+    }
+
+    private Tree<T> calculateNext(Predicate<T> predicate) {
+        Tree<T> tree = root.filter(predicate);
         return findMinimalElement(tree, elem -> elem.compareTo(tree.get()) < 0);
     }
 

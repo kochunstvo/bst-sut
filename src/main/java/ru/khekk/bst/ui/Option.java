@@ -1,5 +1,6 @@
 package ru.khekk.bst.ui;
 
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 
 public class Option<T> {
@@ -16,7 +17,13 @@ public class Option<T> {
     }
 
     public void run(Object obj) {
-        System.out.println(function.apply(obj));
+        try {
+            System.out.println(function.apply(obj));
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        } catch (Exception e) {
+            System.out.println("An exception occurred: " + e.getMessage());
+        }
         System.out.println();
     }
 
