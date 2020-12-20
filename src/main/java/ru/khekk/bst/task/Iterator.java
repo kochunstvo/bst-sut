@@ -40,6 +40,15 @@ public class Iterator<T extends Comparable<T>> {
         return "Done";
     }
 
+    public Tree<T> prevByElement(T element) {
+        Tree<T> pointer = root.findElement(element);
+        Tree<T> next = calculateNext(elem -> elem.compareTo(currentPointer.get()) < 0);
+        if (!next.isEmpty()) {
+            pointer = calculateNext(elem -> elem.compareTo(currentPointer.get()) < 0);
+        }
+        return pointer;
+    }
+
     private Tree<T> calculateNext(Predicate<T> predicate) {
         Tree<T> tree = root.filter(predicate);
         return findMinimalElement(tree, elem -> elem.compareTo(tree.get()) < 0);

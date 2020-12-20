@@ -18,13 +18,17 @@ public interface Tree<T extends Comparable<T>> {
 
     T get();
 
+    default Tree<T> findElement(T element) {
+        return filter(element::equals);
+    }
+
     default Tree<T> filter(Predicate<T> predicate) {
         return filterWithAccumulator(predicate, new EmptyTree<>());
     }
 
+    Tree<T> filterWithAccumulator(Predicate<T> predicate, Tree<T> accumulator);
+
     default Iterator<T> iterator() {
         return new Iterator<>(this);
     }
-
-    Tree<T> filterWithAccumulator(Predicate<T> predicate, Tree<T> accumulator);
 }

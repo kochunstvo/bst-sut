@@ -65,7 +65,6 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 
     @Override
     public Tree<T> remove(T element) {
-
         Tree<T> result;
         switch (element.compareTo(elem)) {
             case -1:
