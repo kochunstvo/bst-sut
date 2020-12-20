@@ -25,12 +25,18 @@ public class Iterator<T extends Comparable<T>> {
     }
 
     public String next() {
-        currentPointer = calculateNext(elem -> elem.compareTo(currentPointer.get()) > 0);
+        Tree<T> next = calculateNext(elem -> elem.compareTo(currentPointer.get()) > 0);
+        if (!next.isEmpty()) {
+            currentPointer = next;
+        }
         return "Done";
     }
 
     public String prev() {
-        currentPointer = calculateNext(elem -> elem.compareTo(currentPointer.get()) < 0);
+        Tree<T> next = calculateNext(elem -> elem.compareTo(currentPointer.get()) < 0);
+        if (!next.isEmpty()) {
+            currentPointer = calculateNext(elem -> elem.compareTo(currentPointer.get()) < 0);
+        }
         return "Done";
     }
 
